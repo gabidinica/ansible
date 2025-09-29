@@ -1,0 +1,43 @@
+---
+- name: Install node and npm
+  host: droplet-ip
+  tasks:
+  - name: Update apt repo and cache
+    apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+  - name: Install nodejs and npm
+    apt:
+      pkg:
+        - nodejs
+        - npm
+      
+- name: Create new linux user for node app
+  host: droplet-ip
+  tasks:
+   - name: Create Linux user
+     user:
+      name: nodejs
+      comment: Nodejs Admin User
+      group: admin
+
+- name: Deploy nodejs app
+  host: droplet-ip
+  become: True
+  become_user: nodejs
+  tasks:
+    - name: Unpack the nodejs tar file
+      unarchive:
+        src: <your-local-path-to-tar-file>
+        dest: /home/nodejs
+    - name: Install dependencies
+      npm:
+        path: /home/nodejs/package
+    - name: Start the application
+      command:
+        chdir: /home/nodejs/package/app
+        cmd: node server
+      async: 1000
+      poll: 0
+    - name: Ensure app is running
+      shell: ps aux | grep node
+      register: app_status
+    - debug: msg={{app_status.stdout_lines}}
