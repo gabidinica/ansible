@@ -51,14 +51,15 @@ ansible-inventory -i inventory_aws_ec2.yaml --graph
      enable_dns_hostnames = true
      ```
   
- 3. ```bash
-    terraform apply —auto-approve
-   ```
+ 3. Run terraform apply:
+```bash
+terraform apply —auto-approve
+```
 
 Run the command:  
-  ```bash
-  ansible-inventory -i inventory_aws_ec2.yaml --graph
-  ```
+```bash
+ansible-inventory -i inventory_aws_ec2.yaml --graph
+```
 
 > Now, the output displays the public DNS names of the EC2 instances.
 
