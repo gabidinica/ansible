@@ -88,14 +88,15 @@ ls -l /opt/nexus
 
 ### Verifying Nexus User in nexus.rc
 1. Open the **nexus.rc** file:  
-   ```bash
-   vim /opt/nexus/bin/nexus.rc
+```bash
+vim /opt/nexus/bin/nexus.rc
 ```
 
 2. Check the commented line where the nexus user needs to be added.
 3. You can verify in your terminal that the line was successfully added.
 
 ### Option 1: Using `blockinfile`
+
 ```yaml
 blockinfile:
   path: /opt/nexus/bin/nexus.rc
