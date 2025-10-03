@@ -1,0 +1,13 @@
+---
+- name: Deploy application in new namespace
+  hosts: localhost
+  kubernetes.core.k8s:
+    name: my-app
+    api_version: v1
+    kind: Namespace
+    state: present
+- name: Deploy nginx app in my-app namespace
+  kubernetes.core.k8s:
+    src: <home directory>/ansible/deploy-app-in-kubernetes/eks-cluster-terraform/nginx-config.yaml
+    state: present
+    namespace: my-app
