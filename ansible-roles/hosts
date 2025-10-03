@@ -1,0 +1,5 @@
+[nexus_server]
+droplet_ip ansible_ssh_private_key_file=~./ssh/id_ed25519 ansible_user=root
+
+[docker_server]
+ec2_instance_public_ip ansible_ssh_private_key_file=~./ssh/id_ed25519 ansible_user=ec2-user
