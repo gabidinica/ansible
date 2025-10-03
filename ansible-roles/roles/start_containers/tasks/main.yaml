@@ -1,0 +1,15 @@
+- name: Copy docker-compose
+  copy:
+        src:  docker-compose.yaml
+        dest: /home/ec2-user/docker-compose.yaml
+
+- name: Docker Login
+  docker_login: 
+        registry_url: "{{registry_url}}"
+        username: "{{docker_username}}"
+        password: "{{docker_password}}"
+
+- name: Start containers from compose
+  community.docker.docker_compose_v2:
+        project_src: /home/ec2-user
+        state: present
